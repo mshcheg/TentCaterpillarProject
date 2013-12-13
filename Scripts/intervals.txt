@@ -1,0 +1,13 @@
+#!/bin/bash
+
+#Extract maximum daily temperaturs and station data into us_tmax_daily.txt from us.txt.
+#us.txt is a file containing: 
+#PRCP = precipitation (hundredths of inches)
+#SNOW = snowfall (tenths of inches)
+#SNWD = snow depth (inches)
+#TMAX = maximum temperature (degrees F)
+#TMIN = minimum temperature (degrees F)
+#downloaded from the UNITED STATES HISTORICAL CLIMATOLOGY NETWORK (USHCN) Daily Dataset (http://cdiac.ornl.gov/ftp/ushcn_daily/)
+
+
+echo "CoopID, Year, Month, Element, Day1, Day2, Day3, Day4, Day5, Day6, Day7, Day8, Day9, Day10, Day11, Day12, Day13, Day14, Day15, Day16, Day17, Day18, Day19, Day20, Day21, Day22, Day23, Day24, Day25, Day26, Day27, Day28, Day29, Day30, Day31" > us_tmax_daily.txt && cat us.txt | cut  --output-delimiter="," -c 1-6,7-10,11-12,13-16,17-21,25-29,33-37,41-45,49-53,57-61,65-69,73-77,81-85,89-93,97-101,105-109,113-117,121-125,129-133,137-141,145-149,153-157,161-165,169-173,177-181,185-189,193-197,201-205,209-213,217-221,225-229,233-237,241-245,249-253,257-261 | grep TMAX >> us_tmax_daily.txt 
