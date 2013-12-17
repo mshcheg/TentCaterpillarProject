@@ -6,7 +6,7 @@ library(maps)
 library(foreach)
 library(doMC)
 
-registerDoMC(20)
+registerDoMC(20) #set number of processors to use
 
 getRaster <- function(file, boundingbox)
 {
@@ -14,7 +14,7 @@ getRaster <- function(file, boundingbox)
 	for (i in 1:12) #Subset by month 1:12
 	{
 		sub <- yearlyTemp[yearlyTemp$Month==i,]		
-		foreach (j=1:31) %dopar% #Subset by day 1:31 
+		foreach (j=1:31) %dopar% #Subset by day 1:31 do 20 days in parallel (registerDoMC(20)) 
 		{			
 			myDay <- sub[,c(1:8,j+8)] 			
 			myDay[myDay=="-9999"] <- NA #Replace ascii no data (-9999) with R no data (NA)			
